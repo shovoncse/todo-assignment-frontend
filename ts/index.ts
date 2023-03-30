@@ -1,5 +1,5 @@
 // const backend_root_url = 'http://localhost:3001';
-const backend_root_url = 'https://todo-assignment-backend-by-shovan.onrender.com/'; //task6
+const backend_root_url = 'https://todo-assignment-backend-by-shovan.onrender.com'; //task6
 import { Task } from "./class/Task.js";   //task4
 import { Todo } from './class/Todo.js';   //task4
 
