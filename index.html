@@ -1,23 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="./css/style.css">  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://unpkg.com/tailwindcss@0.3.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
     <title>ToDo</title>
 </head>
-<body>
-    <div class="container">
-    <h3>ToDoApp</h3>
-    <form>
-        <input id="todoinput" class="form-control" placeholder="Enter new task...">
-    </form>
-    <ul id="todolist" class="list-group"></ul>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script src="./js/index.js" type="module"></script>
+
+<body class="overflow-auto flex items-center justify-center" style="background: #edf2f7;">
+    <div class="main h-full w-full flex items-center justify-center bg-teal-lightest font-sans">
+        <div class="bg-white rounded shadow p-6 m-4 w-full lg:w-3/4 lg:max-w-lg">
+            <div class="mb-4">
+                <h1 class="text-grey-darkest">Todo List</h1>
+                <div class="flex mt-4">
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker"
+                        placeholder="Add Todo" id="todoinput">
+                    <button
+                        class="flex-no-shrink p-2 border-2 rounded text-teal border-teal hover:text-white hover:bg-teal"
+                        id="addTask">Add New</button>
+                </div>
+            </div>
+            <div
+                class="relative items-center p-6 bg-white border border-gray-100 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-800 dark:hover:bg-gray-700 flex justify-center items-center task-wrapper">
+
+                <img src="https://esearch.delhigovt.nic.in/Images/wait.gif" alt="" class="absolute loader" id="loader">
+                <div id="task-list" class="w-full task-list">
+
+                </div>
+            </div>
+        </div>
+
+        <!-- add a footer with made by text -->
+        <div class="text-center text-gray-500 text-xs mb-4">
+            &copy;2023 Made by <a class="underline hover:text-gray-900" href="https://github.com/shovoncse">Shovon</a>.
+            OAMK Assignment.
+        </div>
+        <script src="./js/index.js" type="module"></script>
 </body>
+
 </html>

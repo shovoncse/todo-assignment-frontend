@@ -18,7 +18,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Todo_instances, _Todo_backend_url, _Todo_readJson, _Todo_addToAray, _Todo_removeFromArray;
+var _Todo_instances, _Todo_backend_url, _Todo_readJson, _Todo_addToAray, _Todo_removeFromArray, _Todo_updateArray;
 import { Task } from "./Task.js";
 class Todo {
     constructor(backend_url) {
@@ -39,7 +39,10 @@ class Todo {
         });
         this.addTask = (text) => __awaiter(this, void 0, void 0, function* () {
             return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-                const json = JSON.stringify({ description: text });
+                const json = JSON.stringify({
+                    description: text,
+                    status: true
+                });
                 fetch(__classPrivateFieldGet(this, _Todo_backend_url, "f") + '/new', {
                     method: 'post',
                     headers: {
@@ -69,20 +72,41 @@ class Todo {
                 });
             }));
         };
+        this.updateStatus = (id) => {
+            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+                fetch(__classPrivateFieldGet(this, _Todo_backend_url, "f") + '/update/' + id, {
+                    method: 'put'
+                })
+                    .then(response => response.json())
+                    .then(response => {
+                    __classPrivateFieldGet(this, _Todo_instances, "m", _Todo_updateArray).call(this, id);
+                    resolve(response.id);
+                }, (error) => {
+                    reject(error);
+                });
+            }));
+        };
         __classPrivateFieldSet(this, _Todo_backend_url, backend_url, "f");
     }
 }
 _Todo_backend_url = new WeakMap(), _Todo_instances = new WeakSet(), _Todo_readJson = function _Todo_readJson(taskAsJson) {
     taskAsJson.forEach((node) => {
-        const task = new Task(node.id, node.description);
+        const task = new Task(node.id, node.description, node.status);
         this.tasks.push(task);
     });
 }, _Todo_addToAray = function _Todo_addToAray(id, text) {
-    const task = new Task(id, text);
+    const task = new Task(id, text, true);
     this.tasks.push(task);
     return task;
 }, _Todo_removeFromArray = function _Todo_removeFromArray(id) {
     const arrayWithoutRemoved = this.tasks.filter(task => task.id !== id);
     this.tasks = arrayWithoutRemoved;
+}, _Todo_updateArray = function _Todo_updateArray(id) {
+    const updatedArray = this.tasks.filter(task => {
+        if (task.id === id) {
+            task.status = !task.status;
+        }
+    });
+    this.tasks = updatedArray;
 };
 export { Todo };

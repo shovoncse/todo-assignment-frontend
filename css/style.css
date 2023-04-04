@@ -1,7 +1,24 @@
-h3{
-    margin-top: 20px;
-    margin-bottom: 20px;
+.loader {
+    width: 15%;
+    display: none;
 }
-form{
-    margin-top: auto;
+
+.loader.active {
+    display: block;
+}
+
+.task-list {
+    opacity: 1;
+}
+
+.task-list.loading {
+    opacity: 0.5;
+}
+
+.task-wrapper {
+    min-height: 400px;
+}
+
+.main {
+    flex-direction: column;
 }
